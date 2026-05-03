@@ -165,10 +165,10 @@ const getImageUrl = (path: string | null, size = 'w300') => {
   return `https://image.tmdb.org/t/p/${size}${path}`
 }
 
-// 季列表（过滤掉第0季）- 优先使用加载的数据
+// 季列表（不过滤掉第0季，第0季代表特别季）- 优先使用加载的数据
 const seasons = computed(() => {
   const list = loadedSeasons.value.length ? loadedSeasons.value : (seriesInfo.value?.seasons || [])
-  return list.filter((s) => s.season_number > 0)
+  return list.filter((s) => s.season_number >= 0)
 })
 
 // 当前选中季的集列表
